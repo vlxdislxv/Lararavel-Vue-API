@@ -13,15 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');
 
-Route::view('/places', 'admin.places.index');
+Route::view('/', 'home');
+
 Route::prefix('api/v1')->namespace('Api\V1')->group(function () {
     Route::resource('places', 'PlacesController', ['except' => ['create', 'edit']]);
 });
