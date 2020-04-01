@@ -10,9 +10,6 @@ Create the .env file with db.<br>
 <pre><code>php artisan db:seed</code></pre>
 ## And One More
 <pre><code>php artisan key:generate</code></pre>
-
-## Base Route
-domain/places
 # Requirements
 PHP: 7.3.9<br>
 MariaDB: 10.3
