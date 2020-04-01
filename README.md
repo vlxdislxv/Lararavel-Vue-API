@@ -8,6 +8,9 @@ Create the .env file with db.<br>
 <pre><code>php artisan migrate</code></pre>
 ## And
 <pre><code>php artisan db:seed</code></pre>
+## And One More
+<pre><code>php artisan key:generate</code></pre>
+
 ## Base Route
 domain/places
 # Requirements
