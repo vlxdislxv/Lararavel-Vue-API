@@ -2,7 +2,7 @@
 
 # Installation
 
-<pre><code>composer install && npm install</code></pre>
+<pre><code>git clone https://github.com/vlxdislxv/Lararavel-Vue-API.git market && composer install && npm install</code></pre>
 Create the .env file with db.<br>
 ## Then
 <pre><code>php artisan migrate</code></pre>
