@@ -22,7 +22,3 @@ Auth::routes();
 //Route::get('/home', 'HomeController@index')->name('home');
 
 Route::view('/', 'home');
-
-Route::prefix('api/v1')->namespace('Api\V1')->group(function () {
-    Route::resource('places', 'PlacesController', ['except' => ['create', 'edit']]);
-});

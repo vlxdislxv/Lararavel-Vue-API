@@ -5,10 +5,8 @@ In domain directory:
 <pre><code>git clone https://github.com/vlxdislxv/Lararavel-Vue-API.git . && composer install && npm install</code></pre>
 Create the .env file with db.<br>
 ## Then
-<pre><code>php artisan migrate</code></pre>
+<pre><code>php artisan migrate --seed</code></pre>
 ## And
-<pre><code>php artisan db:seed</code></pre>
-## And One More
 <pre><code>php artisan key:generate</code></pre>
 # Requirements
 PHP: 7.3.9<br>
