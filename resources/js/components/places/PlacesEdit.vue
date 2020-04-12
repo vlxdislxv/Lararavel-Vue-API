@@ -3,7 +3,11 @@
         <div class="form-group">
             <router-link to="/" class="btn btn-outline-dark"><- Back</router-link>
         </div>
-
+        <ul v-if="error" class="list-group">
+            <li v-for="error in errors" class="list-group-item list-group-item-danger">
+                {{ error[0] }}
+            </li>
+        </ul>
         <div class="container">
             <h1 class="w-100 d-flex justify-content-center">Edit place</h1>
             <div class="panel-body">
@@ -78,7 +82,9 @@
                     bathrooms: '',
                     storeys: '',
                     garages: '',
-                }
+                },
+                error: false,
+                errors : []
             }
         },
         methods: {
@@ -90,9 +96,10 @@
                     .then(function (resp) {
                         app.$router.replace('/');
                     })
-                    .catch(function (resp) {
-                        console.log(resp);
-                        alert("Could not create your place");
+                    .catch(function (err) {
+                        console.log(err.response.data);
+                        app.error = err.response.data.message;
+                        app.errors = err.response.data.errors;
                     });
             }
         }

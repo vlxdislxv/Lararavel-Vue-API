@@ -2032,6 +2032,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2042,7 +2046,9 @@ __webpack_require__.r(__webpack_exports__);
         bathrooms: '',
         storeys: '',
         garages: ''
-      }
+      },
+      error: false,
+      errors: []
     };
   },
   methods: {
@@ -2054,9 +2060,10 @@ __webpack_require__.r(__webpack_exports__);
         app.$router.push({
           path: '/'
         });
-      })["catch"](function (resp) {
-        console.log(resp);
-        alert("Could not create your place");
+      })["catch"](function (err) {
+        console.log(err.response.data);
+        app.error = err.response.data.message;
+        app.errors = err.response.data.errors;
       });
     }
   }
@@ -2073,6 +2080,10 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
 //
 //
 //
@@ -2150,7 +2161,9 @@ __webpack_require__.r(__webpack_exports__);
         bathrooms: '',
         storeys: '',
         garages: ''
-      }
+      },
+      error: false,
+      errors: []
     };
   },
   methods: {
@@ -2160,9 +2173,10 @@ __webpack_require__.r(__webpack_exports__);
       var newPlace = app.place;
       axios.patch('/api/v1/places/' + app.placeId, newPlace).then(function (resp) {
         app.$router.replace('/');
-      })["catch"](function (resp) {
-        console.log(resp);
-        alert("Could not create your place");
+      })["catch"](function (err) {
+        console.log(err.response.data);
+        app.error = err.response.data.message;
+        app.errors = err.response.data.errors;
       });
     }
   }
@@ -37784,6 +37798,21 @@ var render = function() {
       1
     ),
     _vm._v(" "),
+    _vm.error
+      ? _c(
+          "ul",
+          { staticClass: "list-group" },
+          _vm._l(_vm.errors, function(error) {
+            return _c(
+              "li",
+              { staticClass: "list-group-item list-group-item-danger" },
+              [_vm._v("\n            " + _vm._s(error[0]) + "\n        ")]
+            )
+          }),
+          0
+        )
+      : _vm._e(),
+    _vm._v(" "),
     _c("div", { staticClass: "container" }, [
       _c("h1", [_vm._v("Create new place")]),
       _vm._v(" "),
@@ -38035,6 +38064,21 @@ var render = function() {
       ],
       1
     ),
+    _vm._v(" "),
+    _vm.error
+      ? _c(
+          "ul",
+          { staticClass: "list-group" },
+          _vm._l(_vm.errors, function(error) {
+            return _c(
+              "li",
+              { staticClass: "list-group-item list-group-item-danger" },
+              [_vm._v("\n            " + _vm._s(error[0]) + "\n        ")]
+            )
+          }),
+          0
+        )
+      : _vm._e(),
     _vm._v(" "),
     _c("div", { staticClass: "container" }, [
       _c("h1", { staticClass: "w-100 d-flex justify-content-center" }, [
@@ -53669,12 +53713,14 @@ module.exports = function(module) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
-/* harmony import */ var _components_places_PlacesIndex_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/places/PlacesIndex.vue */ "./resources/js/components/places/PlacesIndex.vue");
-/* harmony import */ var _components_places_PlacesCreate_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/places/PlacesCreate.vue */ "./resources/js/components/places/PlacesCreate.vue");
-/* harmony import */ var _components_places_PlacesEdit_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/places/PlacesEdit.vue */ "./resources/js/components/places/PlacesEdit.vue");
-/* harmony import */ var _components_auth_Login_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/auth/Login.vue */ "./resources/js/components/auth/Login.vue");
-/* harmony import */ var _components_auth_Register_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/auth/Register.vue */ "./resources/js/components/auth/Register.vue");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
+/* harmony import */ var _components_places_PlacesIndex_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/places/PlacesIndex.vue */ "./resources/js/components/places/PlacesIndex.vue");
+/* harmony import */ var _components_places_PlacesCreate_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/places/PlacesCreate.vue */ "./resources/js/components/places/PlacesCreate.vue");
+/* harmony import */ var _components_places_PlacesEdit_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/places/PlacesEdit.vue */ "./resources/js/components/places/PlacesEdit.vue");
+/* harmony import */ var _components_auth_Login_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/auth/Login.vue */ "./resources/js/components/auth/Login.vue");
+/* harmony import */ var _components_auth_Register_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/auth/Register.vue */ "./resources/js/components/auth/Register.vue");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -53682,42 +53728,42 @@ __webpack_require__.r(__webpack_exports__);
  */
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
-window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
-
-window.Vue.use(vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 
 
 
 
-var routes = [{
-  path: '/',
-  components: {
-    placesIndex: _components_places_PlacesIndex_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
-  }
-}, {
-  path: '/admin/places/create',
-  component: _components_places_PlacesCreate_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-  name: 'createPlace'
-}, {
-  path: '/admin/places/edit/:id',
-  component: _components_places_PlacesEdit_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
-  name: 'editPlace'
-}, {
-  path: '/login',
-  component: _components_auth_Login_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
-  name: 'login'
-}, {
-  path: '/register',
-  component: _components_auth_Register_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
-  name: 'register'
-}];
-var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
-  routes: routes
+
+
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
+var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
+  mode: 'history',
+  routes: [{
+    path: '/',
+    name: 'home',
+    component: _components_places_PlacesIndex_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+  }, {
+    path: '/admin/places/create',
+    component: _components_places_PlacesCreate_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+    name: 'createPlace'
+  }, {
+    path: '/admin/places/edit/:id',
+    component: _components_places_PlacesEdit_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
+    name: 'editPlace'
+  }, {
+    path: '/login',
+    component: _components_auth_Login_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
+    name: 'login'
+  }, {
+    path: '/register',
+    component: _components_auth_Register_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
+    name: 'register'
+  }]
 });
-var app = new Vue({
+var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
+  el: '#app',
   router: router
-}).$mount('#app');
+});
 
 /***/ }),
 

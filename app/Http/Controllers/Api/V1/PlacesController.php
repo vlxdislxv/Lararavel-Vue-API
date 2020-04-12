@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PlaceRequest;
 use App\Place;
 use Illuminate\Http\Request;
 use function foo\func;
@@ -22,10 +23,10 @@ class PlacesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  Request  $request
+     * @param  PlaceRequest  $request
      * @return Place
      */
-    public function store(Request $request)
+    public function store(PlaceRequest $request)
     {
         return Place::create($request->all());
     }
@@ -44,11 +45,11 @@ class PlacesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  Request $request
+     * @param  PlaceRequest $request
      * @param  int  $id
      * @return Place
      */
-    public function update(Request $request, $id)
+    public function update(PlaceRequest $request, $id)
     {
         $place = Place::findOrFail($id);
         $place->update($request->all());
